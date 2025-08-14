@@ -1,6 +1,7 @@
 using Serilog;
 using Microsoft.EntityFrameworkCore;
 using BookStoreApp.API.Data;
+using BookStoreApp.API.Configurations;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 var connString = builder.Configuration.GetConnectionString("BookStoreDB");
 builder.Services.AddDbContext<BookStoreDbContext>(options =>
     options.UseSqlServer(connString));
+
+
+builder.Services.AddAutoMapper(typeof(MapperConfig).Assembly);
 
 // test for committing
 
